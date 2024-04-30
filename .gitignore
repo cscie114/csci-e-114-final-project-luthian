@@ -3,3 +3,4 @@ node_modules/
 .eleventy_cache/
 public
 .env
+.DS_Store
