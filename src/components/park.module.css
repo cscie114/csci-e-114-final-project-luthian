@@ -1,0 +1,45 @@
+figure {
+  margin: 0;
+  padding: 0;
+}
+figcaption {
+  text-align: center;
+  font-size: smaller;
+  padding: 0 0.5rem;
+}
+figcaption em {
+  font-size: smaller;
+  display: block;
+  margin-top: 0.25rem;
+}
+.tile-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 1rem;
+}
+.park-tile {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  width: 25%;
+  background-color: antiquewhite;
+  border-radius: 1rem;
+}
+.park-tile h2 {
+  text-align: center;
+}
+.park-image {
+  width: 100%;
+  max-height: auto;
+}
+.image-title {
+  text-align: center;
+  font-size: larger;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+.large-line-height {
+  line-height: 1.5;
+}
