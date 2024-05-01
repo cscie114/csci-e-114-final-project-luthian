@@ -8,6 +8,8 @@ on:
     # branches: ['main'] run on any push
   pull_request:
     branches: ['main']
+
+  # Allows the workflow to be manually triggered from the Actions tab
   workflow_dispatch:
     inputs:
       logLevel:
@@ -24,6 +26,10 @@ on:
         type: environment
         required: true
 
+  # Allows external webhook trigger
+  repository_dispatch:
+    types:
+      - webhook
 jobs:
   build:
     runs-on: ubuntu-latest
