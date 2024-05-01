@@ -4,7 +4,7 @@ const axios = require('axios').default;
   // Mock out the axios module
 jest.mock('axios');
 
-test('Check fetch of movie data', async () => {
+test('Check fetch of Wordpress data', async () => {
 
   const movieData = { title: 'A movie', year: 2024, director: 'A director' };
   const resp = { data: movieData };
