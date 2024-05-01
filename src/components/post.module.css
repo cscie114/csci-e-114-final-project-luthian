@@ -12,6 +12,9 @@ figcaption em {
   display: block;
   margin-top: 0.25rem;
 }
+section {
+  width: 25%
+}
 .tile-grid {
   display: flex;
   flex-direction: row;
@@ -19,18 +22,18 @@ figcaption em {
   flex-wrap: wrap;
   margin: 0 1rem;
 }
-.park-tile {
+.post-tile {
   margin: 1rem;
   padding: 1rem;
   border: 1px solid #ccc;
-  width: 25%;
+  xxwidth: 25%;
   background-color: antiquewhite;
   border-radius: 1rem;
 }
-.park-tile h2 {
+.post-tile h2 {
   text-align: center;
 }
-.park-image {
+.post-image {
   width: 100%;
   max-height: auto;
 }
@@ -43,3 +46,8 @@ figcaption em {
 .large-line-height {
   line-height: 1.5;
 }
+.desc p {
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+

@@ -19,6 +19,9 @@ const IndexPage = () => {
         src="../images/IMG_0738.jpg"
         alt="An appetizer tray with olives, tomatoes, pickles, celery sticks, and cucumbers."
         className="mt-4"
+        layout="constrained"
+        width={400}
+        aspectRatio={1926 / 2592}
         placeholder="BLURRED"
       />
       <div className="text-xs text-gray-500 mt-2">A simple appetizer tray. Photo Credit: David D'Antonio</div>

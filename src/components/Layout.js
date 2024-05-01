@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 
 const Layout = ({ pageTitle, children }) => {
-  const links = [{'url': '', 'name': 'Home'}, {'url': 'allparks', 'name': 'All Parks'}]
+  const links = [{'url': '', 'name': 'Home'}, {'url': 'allposts', 'name': 'All Posts'}]
   return (
     <div className="p-4">
       <div className="flex justify-between">

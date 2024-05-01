@@ -1,4 +1,3 @@
-const EleventyFetch = require('@11ty/eleventy-fetch');
 require('dotenv').config();
 
 // starter code to create graphql objects from an array of JSON assets
@@ -7,37 +6,106 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const { createNode } = actions;
 
   // YOUR CODE HERE TO FETCH YOUR DATA, SAY FROM A REST API
-  const apiKey = process.env.NPS_API_KEY;
-  const params = new URLSearchParams({ limit: 1000, start: 0 });
-  const url = `https://developer.nps.gov/api/v1/parks?${params.toString()}`;
+  const username = process.env.WORDPRESS_AUTH_USERNAME;
+  const appPassword = process.env.WORDPRESS_AUTH_PASSWORD;
+  const postsUrl = `${process.env.WORDPRESS_API_URL}posts`;
+  const tagsUrl = `${process.env.WORDPRESS_API_URL}tags`;
+  const categoriesUrl = `${process.env.WORDPRESS_API_URL}categories`;
+  const auth = 'Basic ' + Buffer.from(`${username}:${appPassword}`).toString('base64');
 
-  /* This returns a promise */
-  const parkList = await EleventyFetch(url, {
-    duration: '1d', // Save for 1 day. They probably don't make a new park more frequently than that!
-    type: 'json', // We’ll parse JSON for you
-    directory: '.eleventy_cache',
-    fetchOptions: {
+  try {
+    // Get all the tags
+    let response = await fetch(tagsUrl, {
       headers: {
-        // Pretend to be the Safari browser from macOS Mojave 10.14.6
-        'user-agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15',
-        'X-Api-Key': apiKey,
+        Authorization: auth,
+        'Content-Type': 'application/json',
       },
-    },
-  });
+    });
+    const tags = await response.json();
 
-  // loop through data and create Gatsby nodes
-
-  parkList.data.forEach(park =>
-    createNode({
-      ...park,
-      id: createNodeId(park.parkCode), // pass a unique identifier here: [movie.id] for example
-      parent: null,
-      children: [],
-      internal: {
-        type: 'Parks', // name of collection in graphql schema
-        contentDigest: createContentDigest(park),
+    // Get all the categories
+    response = await fetch(categoriesUrl, {
+      headers: {
+        Authorization: auth,
+        'Content-Type': 'application/json',
       },
-    })
-  );
+    });
+    const categories = await response.json();
+
+    response = await fetch(postsUrl, {
+      headers: {
+        Authorization: auth,
+        'Content-Type': 'application/json',
+      },
+    });
+    const posts = await response.json();
+
+    // Now get the images for each post and add them to the post object
+    const promiseList = posts.map(async post => {
+      const mediaUrl = `${process.env.WORDPRESS_API_URL}media?parent=${post.id}`;
+      const resp = await fetch(mediaUrl, {
+        headers: {
+          Authorization: auth,
+          'Content-Type': 'application/json',
+        },
+      });
+      const media = await resp.json();
+      const images = media.map(image => ({
+        url: image.source_url,
+        altText: image.alt_text,
+        caption: image.caption.rendered,
+      }));
+      // console.log(images);
+      return {...post, images: images}
+    });
+
+    const postList = await Promise.all(promiseList);
+    console.log(postList.length, 'posts found');
+
+    // loop through data and create Gatsby nodes
+    postList.forEach(post =>
+      // console.log('post', post.id) ||
+      createNode({
+        ...post,
+        postId: post.id,
+        id: createNodeId(`post-${post.id}`), // pass a unique identifier here: [movie.id] for example
+        parent: null,
+        children: [],
+        internal: {
+          type: 'Posts', // name of collection in graphql schema
+          contentDigest: createContentDigest(post),
+        },
+      })
+    );
+    tags.forEach(tag =>
+      // console.log('tag', tag.id) ||
+      createNode({
+        ...tag,
+        tagId: tag.id,
+        id: createNodeId(`tag-${tag.id}`), // pass a unique identifier here: [movie.id] for example
+        parent: null,
+        children: [],
+        internal: {
+          type: 'Tags', // name of collection in graphql schema
+          contentDigest: createContentDigest(tag),
+        },
+      })
+    );
+    categories.forEach(category =>
+      // console.log('cat', category.id) ||
+      createNode({
+        ...category,
+        categoryId: category.id,
+        id: createNodeId(`category-${category.id}`), // pass a unique identifier here: [movie.id] for example
+        parent: null,
+        children: [],
+        internal: {
+          type: 'Categories', // name of collection in graphql schema
+          contentDigest: createContentDigest(category),
+        },
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
 };

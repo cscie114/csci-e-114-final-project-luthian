@@ -14,9 +14,9 @@ module.exports = {
 
     /*    FOR IMAGES LOCATED WITHIN YOUR PROJECT, USING GatsbyImage or StaticImage    */
 
-    // `gatsby-plugin-image`,
-    // `gatsby-plugin-sharp`,
-    // `gatsby-transformer-sharp`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     //   /*  FOR READING IMAGES FROM FILESYSTEM AND PROCESSING THROUGH THE IMAGE PLUGINS     */
     // {
     //   resolve: `gatsby-source-filesystem`,
