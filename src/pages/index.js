@@ -16,6 +16,7 @@ const IndexPage = () => {
         The site is styled with Tailwind CSS and uses the Gatsby Image plugin to optimize images.
       </p>
       <StaticImage
+        data-testid='appetizer-tray-image'
         src="../images/IMG_0738.jpg"
         alt="An appetizer tray with olives, tomatoes, pickles, celery sticks, and cucumbers."
         className="mt-4"
