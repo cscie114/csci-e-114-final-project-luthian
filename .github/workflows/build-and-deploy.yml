@@ -64,7 +64,7 @@ jobs:
           prod_flag=""
           if [ "${{ github.ref_name }}" = "main" ]; then prod_flag="--prod"; fi
           npx netlify deploy \
-            --dir dist \
+            --dir public \
             --site ${{ secrets.NETLIFY_SITE_ID }} \
             --auth ${{ secrets.NETLIFY_ACCESS_TOKEN }} \
             --message "Deployed ${{ github.ref_name }} from GitHub Actions" \
