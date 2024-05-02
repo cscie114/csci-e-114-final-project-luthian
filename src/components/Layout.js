@@ -1,7 +1,8 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
-const Layout = ({ pageTitle, children }) => {
+function Layout({ pageTitle, children }) {
   const links = [
     { url: '', name: 'Home' },
     { url: 'allposts', name: 'All Posts' },
@@ -16,7 +17,7 @@ const Layout = ({ pageTitle, children }) => {
         </header>
         <nav>
           <ul className="flex">
-            {links.map(link => (
+            {links.map((link) => (
               <li key={link.url} className="ml-2">
                 <Link className="underline text-blue-500" to={`/${link.url}`}>
                   {link.name}
@@ -34,6 +35,13 @@ const Layout = ({ pageTitle, children }) => {
       </footer>
     </div>
   );
+}
+
+Layout.propTypes = {
+  pageTitle: PropTypes.string,
+  children: PropTypes.node,
 };
+
+
 
 export default Layout;

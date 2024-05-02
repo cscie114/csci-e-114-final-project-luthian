@@ -1,11 +1,13 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import * as postStyles from './post.module.css';
 
 function findMatches(list, allElements, key = 'id') {
-  return list.map(item => allElements.find(el => el[key] === item).name);
+  if (!list || !allElements) return ['None'];
+  return list.map((item) => allElements.find((el) => el[key] === item).name);
 }
 
-export default function Post({ post, tags, categories }) {
+function Post({ post, tags, categories }) {
   return (
     <section>
       <div className="text-center">
@@ -14,7 +16,7 @@ export default function Post({ post, tags, categories }) {
         </p>
       </div>
       <ul className={postStyles.tileGrid}>
-        {post.images.map(image => (
+        {post.images.map((image) => (
           <li className={postStyles.postTile} key={image.url}>
             <figure>
               <img className={postStyles.postImage} src={image.url} alt={image.altText} />
@@ -26,12 +28,31 @@ export default function Post({ post, tags, categories }) {
         ))}
       </ul>
       <div className="text-left ml-8">
-        <span className={postStyles.desc} dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />{' '}
+        <span className={postStyles.desc} dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+        {' '}
       </div>
       <div className="text-left ml-8 text-sm text-gray-500">
-        <p>Ingredients:&nbsp; {findMatches(post.tags, tags, 'tagId').join(', ')}</p>
-        <p>Type:&nbsp; {findMatches(post.categories, categories, 'categoryId').join(', ')}</p>
+        <p>
+          Ingredients:&nbsp;
+          {findMatches(post.tags, tags, 'tagId').join(', ')}
+        </p>
+        <p>
+          Type:&nbsp;
+          {findMatches(post.categories, categories, 'categoryId').join(', ')}
+        </p>
+        <p>
+          Date:&nbsp;
+          {post.date}
+        </p>
       </div>
     </section>
   );
 }
+
+Post.propTypes = {
+  post: PropTypes.object,
+  tags: PropTypes.object,
+  categories: PropTypes.object,
+};
+
+export default Post;
