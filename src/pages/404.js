@@ -1,4 +1,3 @@
-import process from 'process';
 import * as React from 'react';
 import { Link } from 'gatsby';
 import Header from '../components/Header';
@@ -32,6 +31,7 @@ function NotFoundPage() {
       <p style={paragraphStyles}>
         Sorry 😔, we couldn’t find what you were looking for.
         <br />
+        {/* eslint-disable no-undef */}
         {process.env.NODE_ENV === 'development' ? (
           <>
             <br />
