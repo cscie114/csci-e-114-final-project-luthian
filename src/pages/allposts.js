@@ -11,8 +11,8 @@ function AllPostsPage({ data }) {
   return (
     <Layout pageTitle="All Posts">
       <span>
-        <h2 className="mb-3 text-xl inline-block">All the Posts</h2>
-        <div className="flex flex-row flex-wrap">
+        <h2 data-testid="subtitle" className="mb-3 text-xl inline-block">All the Posts</h2>
+        <div className="flex flex-row flex-wrap" data-testid="posts">
           {data.allPosts.nodes
             .filter((post) => post.author)
             .map((post) => <Post key={post.id} post={post} tags={data.allTags.nodes} categories={data.allCategories.nodes} />)}
@@ -24,7 +24,7 @@ function AllPostsPage({ data }) {
 
 export const pageQuery = graphql`
   query AllPostsQuery {
-    allPosts {
+    allPosts(filter: {status: {eq: "publish"}}, sort: {date: ASC}) {
       nodes {
         author
         categories
