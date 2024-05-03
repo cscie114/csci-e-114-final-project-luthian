@@ -220,28 +220,4 @@ describe('Test AllPosts Page', () => {
     const figure = firstLI.querySelectorAll('figure');
     expect(figure.length).toBe(1);
   });
-  // it('Has an excerpt', () => {
-  //   const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
-  //   const node = getByTestId('excerpt');
-
-  //   expect(node).toHaveTextContent('A tray for our family Christmas celebration. The skeuomorphic trays are fun but are more work and, eventually, get repetitive.');
-  // });
-  // it('Has the right list of tags', () => {
-  //   const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
-  //   const node = getByTestId('tags');
-
-  //   expect(node).toHaveTextContent('Ingredients: Celery, Cukes, Olives, Pickles, Tomatoes');
-  // });
-  // it('Has the right type', () => {
-  //   const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
-  //   const node = getByTestId('categories');
-
-  //   expect(node).toHaveTextContent('Type: Holiday');
-  // });
-  // it('Has the right date', () => {
-  //   const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
-  //   const node = getByTestId('date');
-
-  //   expect(node).toHaveTextContent('Date: December 24, 2012 7:12 PM');
-  // });
 });
