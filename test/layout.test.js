@@ -11,14 +11,15 @@ describe('Test Layout Component', () => {
     expect(node.querySelectorAll('nav')).toHaveLength(1)
     expect(node.querySelectorAll('footer')).toHaveLength(1)
   })
-  it('Sets the header H1 to be the desired value', () => {
+  it('Sets the header H1 to be the desired value', async () => {
     const { getByTestId } = render(<Layout pageTitle="Title Page"/>)
     const node = getByTestId('layout')
+
+    await screen.findByRole('heading')
 
     expect(node.querySelectorAll('header')).toHaveLength(1)
     expect(node.querySelectorAll('header h1')).toHaveLength(1)
 
-    const header = node.querySelectorAll('header h1')[0]
-    expect(header.textContent).toBe('Title Page')
+    expect(screen.getByRole('heading')).toHaveTextContent('Title Page')
   })
 })

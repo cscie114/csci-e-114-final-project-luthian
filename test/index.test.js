@@ -16,6 +16,6 @@ describe('Test Home Page', () => {
     const node = getByTestId('page-title')
 
     expect(node.tagName).toBe('H1')
-    expect(node.innerHTML).toBe('Home Page')
+    expect(node).toHaveTextContent('Home Page')
   })
 })
