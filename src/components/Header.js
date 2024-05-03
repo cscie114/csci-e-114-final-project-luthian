@@ -26,13 +26,10 @@ function Header({ title }) {
   return (
     <>
       <html lang="en" />
-      <meta charset="UTF-8" />
+      <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>
-        {title}
-        {' '}
-        -
-        {headerData.title}
+      <title data-testid="title">
+        {title} - {headerData.title}
       </title>
       <meta name="description" content={headerData.description} />
       <meta name="keywords" content={headerData.keywords} />
