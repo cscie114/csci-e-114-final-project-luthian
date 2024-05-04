@@ -65,7 +65,7 @@ function AllPostsPage({ data }) {
           {filterPosts().length !== 0 && (
             <h2 data-testid="subtitle" className="mb-3 text-xl w-full text-center">{`${
               filterPosts().length
-            } Posts match your filters`}</h2>
+            } Post${filterPosts().length !== 1 ? "s" : ""} match your filters`}</h2>
           )}
           <div className="flex flex-row flex-wrap h-full" data-testid="posts">
             {filterPosts().length === 0 ? (
