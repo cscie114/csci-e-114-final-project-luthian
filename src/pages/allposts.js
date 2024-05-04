@@ -13,16 +13,21 @@ function AllPostsPage({ data }) {
   const [typeFilter, setTypeFilter] = React.useState([]);
 
   function filterPosts() {
-    return data.allPosts.nodes
-      .filter(post => post.author)
-      .filter(post => {
-        if (ingredientsFilter.length === 0) return true;
-        return post.tags.some(tag => ingredientsFilter.includes(tag));
-      })
-      .filter(post => {
-        if (typeFilter.length === 0) return true;
-        return post.categories.some(category => typeFilter.includes(category));
-      });
+    return (
+      data.allPosts.nodes
+        // Remove posts that have no author. This is sanity check to ensure that the post is all there.
+        .filter(post => post.author)
+        // Filter by ingredients
+        .filter(post => {
+          if (ingredientsFilter.length === 0) return true;
+          return post.tags.some(tag => ingredientsFilter.includes(tag));
+        })
+        // And then filter by type
+        .filter(post => {
+          if (typeFilter.length === 0) return true;
+          return post.categories.some(category => typeFilter.includes(category));
+        })
+    );
   }
   return (
     <Layout pageTitle="All Posts">
@@ -53,6 +58,8 @@ function AllPostsPage({ data }) {
             }}
             title={'Types'}
           />
+          <hr />
+          <p className="text-xs text-gray-500 text-center mt-1">Filters within a set are ORed together. Filter Sets are ANDed together</p>
         </div>
         <div className="col-span-5">
           {filterPosts().length !== 0 && (
