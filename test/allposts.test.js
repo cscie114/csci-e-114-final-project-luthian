@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as Gatsby from 'gatsby';
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import AllPostsPage from '../src/pages/allposts';
 
 const graphql = jest.spyOn(Gatsby, 'graphql');
@@ -202,5 +202,14 @@ describe('Test AllPosts Page', () => {
     const firstLI = node.querySelector('section ul li');
     const figure = firstLI.querySelectorAll('figure');
     expect(figure.length).toBe(1);
+  });
+  it('Clicking the Holiday checkbox results in one post being found', () => {
+    const { getByTestId } = render(<AllPostsPage data={mockGraphQL} />);
+    // Click holiday checkbox
+    fireEvent.click(screen.getByText('Holiday'));
+
+    const node = getByTestId('subtitle');
+    expect(node).toHaveTextContent('1 Post matches your filters');
+
   });
 });
