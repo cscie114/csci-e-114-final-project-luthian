@@ -24,7 +24,7 @@ function CheckboxSet({ checkboxes, callback, title }) {
         </button>
       </span>
       {checkboxes.map((checkbox, index) => (
-        <label key={checkbox.value} className="flex flex-row items-start mt-3">
+        <label key={checkbox.value} className="flex flex-row items-start mt-3 ml-1">
           <input
             type="checkbox"
             name={checkbox.label}
