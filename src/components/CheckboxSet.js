@@ -8,13 +8,14 @@ function CheckboxSet({ checkboxes, callback, title }) {
 
   React.useEffect(() => {
     const newArray = checkboxes.filter((value, index) => checkboxValues[index]).map(item => item.value);
+    // console.log('callback', newArray)
     callback(newArray);
   }, [checkboxValues]);
 
   return (
-    <div className="m-3">
+    <div className="m-3" data-testid="checkboxset">
       <span className="flex flex-row place-content-between">
-        <h3 className="text-center">{title}</h3>
+        <h3 data-testid="title" className="text-center">{title}</h3>
         <button
           type="button"
           className="text-blue-500 underline cursor-pointer block text-xs"
@@ -37,8 +38,8 @@ function CheckboxSet({ checkboxes, callback, title }) {
             className="mr-2 mt-1"
           />
           <span>
-            <div className="leading-tight">{checkbox.label}</div>
-            <div className="text-xs text-gray-500">{checkbox.description}</div>
+            <div data-testid="label" className="leading-tight">{checkbox.label}</div>
+            <div data-testid="description" className="text-xs text-gray-500">{checkbox.description}</div>
           </span>
         </label>
       ))}
