@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import PropTypes from 'prop-types';
 import * as postStyles from './post.module.css';
 
@@ -20,10 +21,10 @@ function Post({ post, tags, categories }) {
         </p>
       </div>
       <ul className={postStyles.tileGrid}>
-        {post.images.map(image => (
+        {post.images.map((image, index) => (
           <li className={postStyles.postTile} key={image.url}>
             <figure>
-              <img data-testid="image" className={postStyles.postImage} src={image.url} alt={image.altText} />
+              <GatsbyImage data-testid="image" className={postStyles.postImage} image={getImage(post.localImages[index].childImageSharp)} alt={image.altText} />
               <figcaption>
                 <span data-testid="caption" dangerouslySetInnerHTML={{ __html: image.caption }} />
               </figcaption>
