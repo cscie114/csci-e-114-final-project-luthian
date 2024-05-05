@@ -413,7 +413,7 @@ describe('Test AllPosts Page', () => {
     const node = getByTestId('subtitle');
 
     expect(node).toHaveTextContent(`${mockGraphQL.allPosts.totalCount} Posts match your filters`);
-    expect(node.className).toBe('mb-3 text-xl w-full text-center');
+    expect(node.className).toBe('mb-3 text-lg w-full text-center');
   });
   it('Contains the proper number of posts', () => {
     const { getByTestId } = render(<AllPostsPage data={mockGraphQL} />);
