@@ -24,7 +24,7 @@ function Post({ post, tags, categories }) {
         {post.images.map((image, index) => (
           <li className={postStyles.postTile} key={image.url}>
             <figure>
-              <GatsbyImage className={postStyles.postImage} image={getImage(post.localImages[index].childImageSharp)} alt={image.altText} />
+              <GatsbyImage data-testid="image" className={postStyles.postImage} image={getImage(post.localImages[index].childImageSharp)} alt={image.altText} />
               <figcaption>
                 <span data-testid="caption" dangerouslySetInnerHTML={{ __html: image.caption }} />
               </figcaption>

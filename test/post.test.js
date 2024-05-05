@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Post from '../src/components/Post';
 
 const post = {
@@ -16,6 +17,34 @@ const post = {
   },
   date: 'December 24, 2012 7:12 PM',
   postId: 16,
+  localImages: [
+    {
+      childImageSharp: {
+        gatsbyImageData: {
+          layout: 'constrained',
+          backgroundColor: '#483828',
+          images: {
+            fallback: {
+              src: '/static/185f1782e16867338ad0abc1f84baafb/70fde/IMG_1572-scaled.jpg',
+              srcSet:
+                '/static/185f1782e16867338ad0abc1f84baafb/c8beb/IMG_1572-scaled.jpg 480w,\n/static/185f1782e16867338ad0abc1f84baafb/c1100/IMG_1572-scaled.jpg 960w,\n/static/185f1782e16867338ad0abc1f84baafb/70fde/IMG_1572-scaled.jpg 1920w',
+              sizes: '(min-width: 1920px) 1920px, 100vw',
+            },
+            sources: [
+              {
+                srcSet:
+                  '/static/185f1782e16867338ad0abc1f84baafb/b46c9/IMG_1572-scaled.webp 480w,\n/static/185f1782e16867338ad0abc1f84baafb/ff0ed/IMG_1572-scaled.webp 960w,\n/static/185f1782e16867338ad0abc1f84baafb/31d0c/IMG_1572-scaled.webp 1920w',
+                type: 'image/webp',
+                sizes: '(min-width: 1920px) 1920px, 100vw',
+              },
+            ],
+          },
+          width: 1920,
+          height: 2560,
+        },
+      },
+    },
+  ],
   images: [
     {
       altText: 'An appetizer tray in the shape of a Christmas tree',
@@ -109,7 +138,11 @@ const categories = [
 ];
 
 describe('Test Post Component', () => {
-  // Render the component
+  // reset the mock call count
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Has the post title', () => {
     const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
     const node = getByTestId('title');
@@ -120,10 +153,10 @@ describe('Test Post Component', () => {
   it('Contains an image', () => {
     const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
     const node = getByTestId('image');
-
-    expect(node['src']).toBe('https://appetizertray.art/wp-content/uploads/2024/04/IMG_1572-scaled.jpg');
+    console.log(node);
+    expect(GatsbyImage).toBeCalledTimes(1);
     expect(node['alt']).toBe('An appetizer tray in the shape of a Christmas tree');
-    
+
     const caption = getByTestId('caption');
     expect(caption.tagName).toBe('SPAN');
     expect(caption).toHaveTextContent('An appetizer tray in the shape of a Christmas tree');
@@ -132,7 +165,9 @@ describe('Test Post Component', () => {
     const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
     const node = getByTestId('excerpt');
 
-    expect(node).toHaveTextContent('A tray for our family Christmas celebration. The skeuomorphic trays are fun but are more work and, eventually, get repetitive.');
+    expect(node).toHaveTextContent(
+      'A tray for our family Christmas celebration. The skeuomorphic trays are fun but are more work and, eventually, get repetitive.'
+    );
   });
   it('Has the right list of tags', () => {
     const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);

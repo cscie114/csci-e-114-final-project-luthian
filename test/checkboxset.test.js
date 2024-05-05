@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import CheckboxSet from '../src/components/CheckboxSet';
-import { all } from 'micromatch';
 
 const allCategories = [
   {
