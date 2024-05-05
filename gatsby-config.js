@@ -60,14 +60,15 @@ module.exports = {
     /* FOR PROCESSING REMOTE IMAGES REFERENCED BY URL
        nodeType is the top-level node type, so if you have an 'allPark' node in graphql, you'd put 'park' here
     */
-    // {
-    //   resolve: `gatsby-plugin-remote-images`,
-    //   options: {
-    //     nodeType: 'park',  
-    //     imagePath: '[PATH TO IMAGE URL]]',  // navigating from the nodeType down
-    //     name: 'localImages',  // name of property in graphql schema to contain the new, cached processed image
-    //     silent: true   // ignore 404s
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: 'Posts',  
+        imagePath: 'images[].url',  // navigating from the nodeType down
+        name: 'localImages',  // name of property in graphql schema to contain the new, cached processed image
+        type: 'array',  // 'array' or 'object'
+        silent: true   // ignore 404s
+      },
+    },
   ],
 };

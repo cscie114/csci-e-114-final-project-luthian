@@ -84,7 +84,7 @@ function AllPostsPage({ data }) {
 
 export const pageQuery = graphql`
   query AllPostsQuery {
-    allPosts(filter: { status: { eq: "publish" } }, sort: { date: ASC }) {
+    allPosts(filter: {status: {eq: "publish"}}, sort: {date: ASC}) {
       nodes {
         author
         categories
@@ -103,15 +103,20 @@ export const pageQuery = graphql`
           caption
           url
         }
+        localImages {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
       }
       totalCount
     }
     allCategories {
       nodes {
-        categoryId
         id
         name
         description
+        categoryId
       }
     }
     allTags {
@@ -122,7 +127,7 @@ export const pageQuery = graphql`
         name
       }
     }
-  }
+    }
 `;
 
 export default AllPostsPage;
