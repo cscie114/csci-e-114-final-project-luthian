@@ -33,7 +33,7 @@ function AllPostsPage({ data }) {
     <Layout pageTitle="All Posts">
       <div className="grid grid-cols-6 gap-3">
         <div>
-          <div className="text-center">Filters</div>
+          <h2 className="mb-3 text-lg text-center">Filters</h2>
           <hr />
           <CheckboxSet
             checkboxes={data.allTags.nodes.map(tag => ({
@@ -63,9 +63,11 @@ function AllPostsPage({ data }) {
         </div>
         <div className="col-span-5">
           {filterPosts().length !== 0 && (
-            <h2 data-testid="subtitle" className="mb-3 text-xl w-full text-center">{`${
+            <>
+            <h2 data-testid="subtitle" className="mb-3 text-lg w-full text-center">{`${
               filterPosts().length
             } Post${filterPosts().length !== 1 ? "s match" : " matches"} your filters`}</h2>
+            <hr className='mb-2'/></>
           )}
           <div className="flex flex-row flex-wrap h-full" data-testid="posts">
             {filterPosts().length === 0 ? (
