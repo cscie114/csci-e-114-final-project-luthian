@@ -153,7 +153,7 @@ describe('Test Post Component', () => {
   it('Contains an image', () => {
     const { getByTestId } = render(<Post post={post} tags={tags} categories={categories} />);
     const node = getByTestId('image');
-    console.log(node);
+
     expect(GatsbyImage).toBeCalledTimes(1);
     expect(node['alt']).toBe('An appetizer tray in the shape of a Christmas tree');
 
