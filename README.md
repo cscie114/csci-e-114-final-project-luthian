@@ -68,3 +68,9 @@ Still more time passes...
 * If you're using your own WordPress site, go create a new _Post_. It should have a _title_, an _image_ (not just the featured image), perhaps a _caption_ for that image in the Media Library, and a description. Assign it the appropriate _tags_ and _categories_ and publish the post. I also backdated each post to the date/time when the photo was taken. Publishing or updating the post should trigger the GitHub workflow.
 * You can monitor the workflow from the GitHub Action page. When the build is finished, go to Netlify and open your site.
 
+### Notes
+
+* There are several warnings that show up when testing or building the site. These can be ignored as they don't affect the site operation.
+  * During the testing of the **Header** component, Jest will complain that `html` cannot appear as a child of `div`. This is true but is due to how the React testing framework does its thing. It doesn't happen in the real site
+  * During the build of the site in development mode, Gatsby's `eslint` configuration will complain about React hooks and a `label` not being associated with its control. The former hook dependencies aren't needed and, in fact, cause an infinite loop if used. The latter isn't shown when running `eslint` with my configuration and the `label` is associated with the `input` by wrapping it.
+  

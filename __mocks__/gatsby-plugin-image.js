@@ -3,7 +3,7 @@ const React = require("react")
 const plugin = jest.requireActual("gatsby-plugin-image")
 
 const mockImage = ({ imgClassName, aspectRatio, ...props }) =>
-  React.createElement("IMG", {
+  React.createElement("img", {
     ...props,
     className: imgClassName,
   })
